@@ -1,5 +1,23 @@
 const controller = {};
 
+
+controller.index = (req,res) =>{
+    res.render('index');
+};
+
+controller.map = (req,res) =>{
+    res.render('map');
+};
+
+controller.foro = (req,res) =>{
+    res.render('foro');
+};
+
+
+controller.chatbot = (req,res) =>{
+    res.render('chatbot');
+};
+
 controller.list = (req, res) => {
     req.getConnection((err,conn) =>{
         conn.query('select * from  pruebacrud',(err,customers) => {

@@ -18,6 +18,10 @@ controller.chatbot = (req,res) =>{
     res.render('chatbot');
 };
 
+controller.login = (req,res) =>{
+    res.render('login');
+};
+
 controller.list = (req, res) => {
     req.getConnection((err,conn) =>{
         conn.query('select * from  pruebacrud',(err,customers) => {

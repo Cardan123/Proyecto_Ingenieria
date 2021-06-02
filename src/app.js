@@ -29,7 +29,7 @@ app.use(express.urlencoded({extended:false}));
 app.use('/',customersRoutes);
 
 //archivos estaticos
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'../public')));
 
 
 app.listen(app.get('port'), () => {

@@ -1,12 +1,12 @@
-<%- include ('partials/_header')  %>
+<%- include ('../partials/_header')  %>
   <style>
     /* Always set the map height explicitly to define the size of the div
      * element that contains the map. */
     #map {
-        overflow:hidden;
-padding-bottom:56.25%;
-position:relative;
-height:0;
+      overflow:hidden;
+      padding-bottom:56.25%;
+      position:relative;
+      height:0;
     }
 
     /* Optional: Makes the sample page fill the window. */
@@ -15,6 +15,7 @@ height:0;
       height: 100%;
       margin: 0;
       padding: 0;
+      color: darkslategrey;
     }
 
     /* TODO: Step 4A1: Make a generic sidebar */
@@ -28,10 +29,12 @@ height:0;
       z-index: 1;
       overflow-x: hidden;
       transition: all .2s ease-out;
+      color: darkslategrey;
     }
 
     .open {
       width: 250px;
+      color: darkslategrey;
     }
 
     /* Styling for place details */
@@ -40,6 +43,7 @@ height:0;
       height: auto;
       max-height: 166px;
       display: block;
+      color: darkslategrey;
     }
 
     .place,
@@ -47,6 +51,7 @@ height:0;
       font-family: 'open sans', arial, sans-serif;
       padding-left: 18px;
       padding-right: 18px;
+      color: darkslategrey;
     }
 
     .details {
@@ -117,7 +122,6 @@ height:0;
 
     // Handle a geolocation error
     function handleLocationError(browserHasGeolocation, infoWindow) {
-      // Set default location to Sydney, Australia
       pos = { lat: 19.4369612, lng: -99.1505586 };
       map = new google.maps.Map(document.getElementById('map'), {
         center: pos,
@@ -264,4 +268,4 @@ height:0;
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtFHxVh5eNEI3ng6L80vT4nEgewbSh1LQ&libraries=places&callback=initMap">
   </script>
   
-<%- include ('partials/_footer')  %>
+<%- include ('../partials/_footer')  %>

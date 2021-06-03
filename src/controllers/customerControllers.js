@@ -2,25 +2,66 @@ const controller = {};
 
 
 controller.index = (req,res) =>{
-    res.render('index');
+    res.render('viewindex/index');
 };
 
 controller.map = (req,res) =>{
-    res.render('map');
+    res.render('viewindex/map');
 };
 
 controller.foro = (req,res) =>{
-    res.render('foro');
+    req.getConnection((err,conn) =>{
+        conn.query('select * from  publicaciones',(err,publications) => {
+            if (err){
+                res.json(err);
+            }
+            console.log(publications);
+            res.render('viewindex/foro',{
+                data: publications
+            });
+        });
+    });
 };
 
 
 controller.chatbot = (req,res) =>{
-    res.render('chatbot');
+    res.render('viewindex/chatbot');
+};
+
+controller.formlogin = (req,res) =>{
+    res.render('formlogin');
 };
 
 controller.login = (req,res) =>{
-    res.render('login');
+    const user = req.body;
+    req.getConnection((err,conn) =>{
+        conn.query("select * from usuarios where nickname = ? ",[user.user],(err,customer) =>{
+            conn.query("select * from usuarios where password = ? ",[user.password],(err,customer) =>{
+                if(Object.keys(customer).length == 0){
+                    res.render("formlogin");
+                }else{
+                    console.log(customer);
+                    res.render("viewindex/index.ejs",{
+                        data: customer
+                    });
+                }
+            });
+        });
+    }); 
 };
+
+controller.add_publicacion = (req,res) =>{
+    const data = req.body;
+    req.getConnection((err,conn)=>{
+        conn.query('insert into publicaciones set ?', [data],(err,publicacion) =>{
+            console.log(publicacion);
+            res.redirect('foro');
+        })
+    });
+};
+
+
+///////////////////////////////////////////////////////////////
 
 controller.list = (req, res) => {
     req.getConnection((err,conn) =>{

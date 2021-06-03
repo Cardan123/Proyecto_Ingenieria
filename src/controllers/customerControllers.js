@@ -1,12 +1,26 @@
 const controller = {};
 
 
+controller.init = (req,res) =>{
+    req.session.data = {};
+    res.render('viewindex/index',{
+        data: req.session.data
+    });
+};
+
+
 controller.index = (req,res) =>{
-    res.render('viewindex/index');
+    const user = req.session.data;
+    console.log(req.session.data);
+    res.render('viewindex/index',{
+        data: user 
+    });
 };
 
 controller.map = (req,res) =>{
-    res.render('viewindex/map');
+    res.render('viewindex/map', {
+        data: req.session.data  
+    });
 };
 
 controller.foro = (req,res) =>{
@@ -17,7 +31,8 @@ controller.foro = (req,res) =>{
             }
             console.log(publications);
             res.render('viewindex/foro',{
-                data: publications
+                data: req.session.data,
+                publi: publications
             });
         });
     });
@@ -25,7 +40,9 @@ controller.foro = (req,res) =>{
 
 
 controller.chatbot = (req,res) =>{
-    res.render('viewindex/chatbot');
+    res.render('viewindex/chatbot',{
+        data: req.session.data  
+    });
 };
 
 controller.formlogin = (req,res) =>{
@@ -34,18 +51,21 @@ controller.formlogin = (req,res) =>{
 
 controller.login = (req,res) =>{
     const user = req.body;
+    console.log(user.nickname);
+    console.log(user.password);
     req.getConnection((err,conn) =>{
-        conn.query("select * from usuarios where nickname = ? ",[user.user],(err,customer) =>{
-            conn.query("select * from usuarios where password = ? ",[user.password],(err,customer) =>{
-                if(Object.keys(customer).length == 0){
+        conn.query("select * from usuarios where nickname = ? and password = ?",[user.nickname,user.password],(err,customer_nickname) =>{
+                if(Object.keys(customer_nickname).length == 0){
                     res.render("formlogin");
                 }else{
-                    console.log(customer);
+                    console.log(customer_nickname);
+                    const {id,nickname,password,type} = customer_nickname[0];
+                    req.session.data = {id,nickname,password,type} ;
+                    console.log(req.session.data);
                     res.render("viewindex/index.ejs",{
-                        data: customer
+                        data: req.session.data
                     });
                 }
-            });
         });
     }); 
 };
@@ -60,6 +80,62 @@ controller.add_publicacion = (req,res) =>{
     });
 };
 
+controller.salir = (req,res) =>{
+    req.session.data = {};
+    res.render('viewindex/index',{
+        data: req.session.data
+    });
+};
+
+controller.edit_publicacion = (req,res) =>{
+    const {id} = req.params;
+    req.getConnection((err,conn) =>{
+        conn.query("select * from publicaciones where id = ?",[id],(err,customer) =>{
+            console.log(customer);
+            res.render('formedit',{
+                data: req.session.data,
+                publi: customer[0]
+            }); 
+        });
+    }); 
+};
+
+controller.update_publicacion = (req,res) =>{
+    const {id} = req.params;
+    const newCustomer = req.body;
+    req.getConnection((err,conn) =>{
+        conn.query('update publicaciones set ? where id = ?', [newCustomer,id], (err, rows) => {
+            conn.query('select * from  publicaciones',(err,publications) => {
+                if (err){
+                    res.json(err);
+                }
+                console.log(publications);
+                res.render('viewindex/foro',{
+                    data: req.session.data,
+                    publi: publications
+                });
+            });
+        });
+    });
+};
+
+controller.delete_publicacion = (req,res) =>{
+    const {id} = req.params;
+    req.getConnection((err,conn) =>{
+       conn.query('Delete from publicaciones where id = ?',[id],(err,customer) =>{
+            conn.query('select * from  publicaciones',(err,publications) => {
+                if (err){
+                    res.json(err);
+                }
+                console.log(publications);
+                res.render('viewindex/foro',{
+                    data: req.session.data,
+                    publi: publications
+                });
+            });
+       });
+    });
+};
 
 ///////////////////////////////////////////////////////////////
 

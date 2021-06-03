@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const mysql = require('mysql');
+const session = require('express-session');
 const myConnection = require('express-myconnection');
 
 const app = express();
@@ -23,6 +24,12 @@ app.use(myConnection(mysql,{
     port: 3306,
     database: 'proyecto_ingenieria'
 }, 'single'));
+app.use(session({
+    secret: 'mysecretkey',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 //routes

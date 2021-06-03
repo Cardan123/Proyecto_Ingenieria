@@ -14,18 +14,20 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="/">KYAV</a>
+  <a class="navbar-brand" href="/index">KYAV</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/">Home</a>
+      <a class="nav-item nav-link active" href="/index">Home</a>
       <a class="nav-item nav-link" href="/map">Maps</a>
       <a class="nav-item nav-link" href="/foro">Foro</a>
       <a class="nav-item nav-link" href="/chatbot">Chatbot</a>
-      <% if (1==1){ %>
-      <a class="nav-item nav-link" href="/login">Login</a>
+      <% if (Object.keys(data).length == 0){ %>
+        <a class="nav-item nav-link" href="/login">Login</a>
+      <% }else{ %>
+        <a class="nav-item nav-link" href="/salir">Salir</a>
       <% } %>
     </div>
   </div>

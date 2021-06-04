@@ -16,6 +16,8 @@ router.get('/salir', customerControllers.salir);
 router.get('/delete_publicacion/:id', customerControllers.delete_publicacion);
 router.get('/update_publicacion/:id', customerControllers.edit_publicacion);
 router.post('/update_publicacion/:id', customerControllers.update_publicacion);
+router.get('/register',customerControllers.formnewuser);
+router.post('/register',customerControllers.insertusuario);
 
 
 router.post('/add',customerControllers.save);

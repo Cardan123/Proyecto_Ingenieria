@@ -3,7 +3,7 @@ const controller = {};
 
 controller.init = (req,res) =>{
     req.session.data = {};
-    res.render('viewindex/index',{
+    res.render('index',{
         data: req.session.data
     });
 };
@@ -12,13 +12,13 @@ controller.init = (req,res) =>{
 controller.index = (req,res) =>{
     const user = req.session.data;
     console.log(req.session.data);
-    res.render('viewindex/index',{
+    res.render('index',{
         data: user 
     });
 };
 
 controller.map = (req,res) =>{
-    res.render('viewindex/map', {
+    res.render('map', {
         data: req.session.data  
     });
 };
@@ -30,7 +30,7 @@ controller.foro = (req,res) =>{
                 res.json(err);
             }
             console.log(publications);
-            res.render('viewindex/foro',{
+            res.render('foro',{
                 data: req.session.data,
                 publi: publications
             });
@@ -40,7 +40,7 @@ controller.foro = (req,res) =>{
 
 
 controller.chatbot = (req,res) =>{
-    res.render('viewindex/chatbot',{
+    res.render('chatbot',{
         data: req.session.data  
     });
 };
@@ -62,7 +62,7 @@ controller.login = (req,res) =>{
                     const {id,nickname,password,type} = customer_nickname[0];
                     req.session.data = {id,nickname,password,type} ;
                     console.log(req.session.data);
-                    res.render("viewindex/index.ejs",{
+                    res.render("index.ejs",{
                         data: req.session.data
                     });
                 }
@@ -82,7 +82,7 @@ controller.add_publicacion = (req,res) =>{
 
 controller.salir = (req,res) =>{
     req.session.data = {};
-    res.render('viewindex/index',{
+    res.render('index',{
         data: req.session.data
     });
 };
@@ -110,7 +110,7 @@ controller.update_publicacion = (req,res) =>{
                     res.json(err);
                 }
                 console.log(publications);
-                res.render('viewindex/foro',{
+                res.render('foro',{
                     data: req.session.data,
                     publi: publications
                 });
@@ -128,7 +128,7 @@ controller.delete_publicacion = (req,res) =>{
                     res.json(err);
                 }
                 console.log(publications);
-                res.render('viewindex/foro',{
+                res.render('foro',{
                     data: req.session.data,
                     publi: publications
                 });
@@ -136,6 +136,23 @@ controller.delete_publicacion = (req,res) =>{
        });
     });
 };
+
+
+controller.formnewuser = (req,res) =>{
+    res.render("formnewuser");
+};
+
+controller.insertusuario = (req,res) =>{
+    const data = req.body;
+    console.log(data);
+    req.getConnection((err,conn)=>{
+        conn.query('insert into usuarios set ?', [data],(err,customer) =>{
+            console.log(customer);
+            res.render('formlogin');
+        })
+    });
+};
+
 
 ///////////////////////////////////////////////////////////////
 
@@ -189,7 +206,7 @@ controller.delete = (req,res) =>{
     const {id} = req.params;
     req.getConnection((err,conn) =>{
        conn.query('Delete from pruebacrud where id = ?',[id],(err,customer) =>{
-            res.redirect('/');
+            res.redirect('/register');
        });
     });
 };

@@ -23,11 +23,12 @@ and is wrapped around the whole page content, except for the footer in this exam
                         <input type="hidden" name="username" placeholder="username" class="form-control" value="<%=data.nickname%>">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="content" placeholder="Contenido" class="form-control">
+                        <input type="text" name="type_content" placeholder="Titulo" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="type_content" placeholder="Titulo" class="form-control">
+                        <textarea name="content"  class="form-control" rows="4" cols="50" required></textarea>
                     </div>
+                    
                     <button type="submit" class ="btn btn-primary">Subir publicacion</button>
                 </form>
             </div>

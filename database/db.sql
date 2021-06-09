@@ -3,13 +3,6 @@ create database proyecto_ingenieria;
 
 use proyecto_ingenieria;
 
-create table pruebacrud(
-  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(50) NOT NULL,
-  address VARCHAR(100) NOT NULL,
-  phone VARCHAR(15)
-)
-
 CREATE TABLE usuarios(
 id         int(10) auto_increment not null,
 nickname   varchar(100) not null,
@@ -42,5 +35,3 @@ CONSTRAINT fk_id_publicacion FOREIGN KEY(id_publicacion) REFERENCES publicacione
 insert into usuarios (nickname,password,type) values ("cardan","12345","Adminstrador");
 
 show tables;
-
-describe pruebacrud;

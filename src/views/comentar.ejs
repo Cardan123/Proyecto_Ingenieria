@@ -67,11 +67,13 @@
                 
                     <div class="w3-container">
                       <p><%= coment[i].comentario%></p>
+                      <% if (data.type == "Adminstrador" ||coment[i].id_usuarios == data.id){ %>
                       <div class="w3-row">
                         <div class="w3-col m10 s12">
                             <a href="/delete_comentario/<%=coment[i].id %>" class="btn btn-danger">Delete Comentario</a>
                         </div>
                       </div>
+                      <%}%>
                     </div>
                     
                   </div>

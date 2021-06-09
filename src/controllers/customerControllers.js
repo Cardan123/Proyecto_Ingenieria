@@ -2,7 +2,9 @@ const controller = {};
 
 
 controller.init = (req,res) =>{
-    req.session.data = {};
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     res.render('index',{
         data: req.session.data
     });
@@ -10,6 +12,9 @@ controller.init = (req,res) =>{
 
 
 controller.index = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     const user = req.session.data;
     console.log(req.session.data);
     res.render('index',{
@@ -18,12 +23,18 @@ controller.index = (req,res) =>{
 };
 
 controller.map = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     res.render('map', {
         data: req.session.data  
     });
 };
 
 controller.foro = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     req.getConnection((err,conn) =>{
         conn.query('select * from  publicaciones',(err,publications) => {
             if (err){
@@ -40,6 +51,9 @@ controller.foro = (req,res) =>{
 
 
 controller.chatbot = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     res.render('chatbot',{
         data: req.session.data  
     });
@@ -50,6 +64,9 @@ controller.formlogin = (req,res) =>{
 };
 
 controller.login = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     const user = req.body;
     console.log(user.nickname);
     console.log(user.password);
@@ -71,6 +88,9 @@ controller.login = (req,res) =>{
 };
 
 controller.add_publicacion = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     const data = req.body;
     req.getConnection((err,conn)=>{
         conn.query('insert into publicaciones set ?', [data],(err,publicacion) =>{
@@ -81,6 +101,9 @@ controller.add_publicacion = (req,res) =>{
 };
 
 controller.salir = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     req.session.data = {};
     res.render('index',{
         data: req.session.data
@@ -88,6 +111,9 @@ controller.salir = (req,res) =>{
 };
 
 controller.edit_publicacion = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     const {id} = req.params;
     req.getConnection((err,conn) =>{
         conn.query("select * from publicaciones where id = ?",[id],(err,customer) =>{
@@ -101,6 +127,9 @@ controller.edit_publicacion = (req,res) =>{
 };
 
 controller.update_publicacion = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     const {id} = req.params;
     const newCustomer = req.body;
     req.getConnection((err,conn) =>{
@@ -120,6 +149,9 @@ controller.update_publicacion = (req,res) =>{
 };
 
 controller.delete_publicacion = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     const {id} = req.params;
     req.getConnection((err,conn) =>{
        conn.query('Delete from publicaciones where id = ?',[id],(err,customer) =>{
@@ -154,6 +186,9 @@ controller.insertusuario = (req,res) =>{
 };
 
 controller.comentar = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     const {id} = req.params;
     req.getConnection((err,conn) =>{
         conn.query("select * from publicaciones where id = ?",[id],(err,customer) =>{
@@ -170,6 +205,9 @@ controller.comentar = (req,res) =>{
 };
 
 controller.comentar_upload = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     const data = req.body;
     req.getConnection((err,conn)=>{
         conn.query('insert into comentarios set ?', [data],(err,publicacion) =>{
@@ -180,6 +218,9 @@ controller.comentar_upload = (req,res) =>{
 };
 
 controller.delete_comentario = (req,res) =>{
+    if (typeof req.session.data == 'undefined') {
+        req.session.data = {}
+    }
     const {id} = req.params;
     req.getConnection((err,conn) =>{
        conn.query('Delete from comentarios where id = ?',[id],(err,customer) =>{

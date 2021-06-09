@@ -153,9 +153,53 @@ controller.insertusuario = (req,res) =>{
     });
 };
 
+controller.comentar = (req,res) =>{
+    const {id} = req.params;
+    req.getConnection((err,conn) =>{
+        conn.query("select * from publicaciones where id = ?",[id],(err,customer) =>{
+            conn.query("select * from comentarios where id_publicacion = ?",[id],(err,customer_coment) =>{
+                console.log(customer);
+                res.render('comentar',{
+                    data: req.session.data,
+                    coment: customer_coment,
+                    publi: customer[0]
+                }); 
+            });
+        });
+    }); 
+};
+
+controller.comentar_upload = (req,res) =>{
+    const data = req.body;
+    req.getConnection((err,conn)=>{
+        conn.query('insert into comentarios set ?', [data],(err,publicacion) =>{
+            console.log(publicacion);
+            res.redirect('foro');
+        })
+    });
+};
+
+controller.delete_comentario = (req,res) =>{
+    const {id} = req.params;
+    req.getConnection((err,conn) =>{
+       conn.query('Delete from comentarios where id = ?',[id],(err,customer) =>{
+            conn.query('select * from  publicaciones',(err,publications) => {
+                if (err){
+                    res.json(err);
+                }
+                console.log(publications);
+                res.render('foro',{
+                    data: req.session.data,
+                    publi: publications
+                });
+            });
+       });
+    });
+};
 
 ///////////////////////////////////////////////////////////////
 
+/*
 controller.list = (req, res) => {
     req.getConnection((err,conn) =>{
         conn.query('select * from  pruebacrud',(err,customers) => {
@@ -210,5 +254,7 @@ controller.delete = (req,res) =>{
        });
     });
 };
+
+*/
 
 module.exports = controller;

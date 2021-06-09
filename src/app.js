@@ -35,9 +35,6 @@ app.use(express.urlencoded({extended:false}));
 //routes
 app.use('/',customersRoutes);
 
-//archivos estaticos
-app.use(express.static(path.join(__dirname,'../public')));
-
 
 app.listen(app.get('port'), () => {
     console.log("Server on port 3000");

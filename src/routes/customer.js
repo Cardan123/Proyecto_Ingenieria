@@ -19,11 +19,14 @@ router.post('/update_publicacion/:id', customerControllers.update_publicacion);
 router.get('/register',customerControllers.formnewuser);
 router.post('/register',customerControllers.insertusuario);
 
+router.get('/comentarios_publicacion/:id',customerControllers.comentar);
+router.post('/comentar',customerControllers.comentar_upload);
 
-router.post('/add',customerControllers.save);
-router.get('/delete/:id',customerControllers.delete);
+router.get('/delete_comentario/:id',customerControllers.delete_comentario);
+//router.post('/add',customerControllers.save);
+//router.get('/delete/:id',customerControllers.delete);
 
-router.get('/update/:id',customerControllers.edit);
-router.post('/update/:id',customerControllers.update);
+//router.get('/update/:id',customerControllers.edit);
+//router.post('/update/:id',customerControllers.update);
 
 module.exports = router;

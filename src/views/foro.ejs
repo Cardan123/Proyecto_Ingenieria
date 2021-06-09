@@ -52,15 +52,17 @@ and is wrapped around the whole page content, except for the footer in this exam
       <div class="w3-card-4 w3-margin w3-white">
         <div class="w3-container">
           <h3><b><%= publi[i].type_content %></b></h3>
-          <h5><span class="w3-opacity"><%= publi[i].username %></span></h5>
+          <h5><span class="w3-opacity"><%= publi[i].username %> </span></h5>
         </div>
     
         <div class="w3-container">
           <p><%= publi[i].content %></p>
           <div class="w3-row">
             <div class="w3-col m10 s12">
+                
                 <% if (Object.keys(data).length == 0){ %>
                  <% }else{ %>
+                    <a href="/comentarios_publicacion/<%= publi[i].id %>" class="btn btn-primary">Comentar</a>
                     <% if (data.type == "Adminstrador" || publi[i].id_usuarios == data.id){ %>
                     <a href="/delete_publicacion/<%= publi[i].id %>" class="btn btn-danger">Delete</a>
                     <a href="/update_publicacion/<%= publi[i].id %>" class="btn btn-info">Update</a>

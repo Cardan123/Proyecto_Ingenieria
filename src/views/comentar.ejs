@@ -1,0 +1,100 @@
+<%- include ('partials/_header')  %>
+<div class="container">
+    <div class="col-md-18">
+        <div class="card">
+            <div class ="card-body">
+                <form action="/comentar" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="id_usuarios" placeholder="id_usuarios" class="form-control" value="<%=data.id%>">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="id_publicacion" placeholder="id_publicacion" class="form-control" value="<%=publi.id%>">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="username" placeholder="username" class="form-control" value="<%=data.nickname%>">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="comentario"  class="form-control" rows="4" cols="50" required></textarea>
+                    </div>
+                    <button type="submit" class ="btn btn-primary">Comentar publicacion</button>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<div class="w3-content" style="max-width:1400px">
+
+    <!-- Header -->
+    
+    
+    <!-- Grid -->
+    <div class="w3-row">
+    
+    <!-- Blog entries -->
+    <div class="w3-col 28 s12">
+      <!-- Blog entry -->
+      <div class="w3-card-4 w3-margin w3-white">
+        <div class="w3-container">
+          <h3><b><%= publi.type_content %></b></h3>
+          <h5><span class="w3-opacity"><%= publi.username %> </span></h5>
+        </div>
+    
+        <div class="w3-container">
+          <p><%= publi.content %></p>          
+        </div>
+        
+      </div>
+      <hr>
+
+    <% if (coment){ %>
+        <%for(var i = 0; i < coment.length; i++){ %>
+            <div class="w3-content" style="max-width:1400px">
+
+                <!-- Header -->
+                
+                
+                <!-- Grid -->
+                <div class="w3-row">
+                
+                <!-- Blog entries -->
+                <div class="w3-col 28 s12">
+                  <!-- Blog entry -->
+                  <div class="w3-card-4 w3-margin w3-white">
+                    <div class="w3-container">
+                      <h3><b><%= coment[i].username%></b></h3>
+                    </div>
+                
+                    <div class="w3-container">
+                      <p><%= coment[i].comentario%></p>
+                      <div class="w3-row">
+                        <div class="w3-col m10 s12">
+                            <a href="/delete_comentario/<%=coment[i].id %>" class="btn btn-danger">Delete Comentario</a>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <hr>
+                  
+                <!-- END BLOG ENTRIES -->
+                </div>
+                <!-- END Introduction Menu -->
+                </div>
+                <!-- END GRID -->
+                </div><br>
+                <!-- END w3-content -->
+                </div>
+        <%}%>         
+    <%}%>    
+      
+    <!-- END BLOG ENTRIES -->
+    </div>
+    <!-- END Introduction Menu -->
+    </div>
+    <!-- END GRID -->
+    </div><br>
+    <!-- END w3-content -->
+    </div>
+
+<%- include ('partials/_footer')  %>

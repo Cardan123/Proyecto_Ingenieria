@@ -32,6 +32,10 @@ CONSTRAINT fk_id_usuarios_comentarios FOREIGN KEY(id_usuarios) REFERENCES usuari
 CONSTRAINT fk_id_publicacion FOREIGN KEY(id_publicacion) REFERENCES publicaciones(id)
 )ENGINE=InnoDB;
 
-insert into usuarios (nickname,password,type) values ("cardan","12345","Adminstrador");
+insert into usuarios (nickname,password,type) values ("cardan","7pn~<pd,4f+APf.'","Adminstrador");
+insert into usuarios (nickname,password,type) values ("kevin","/LSp4K9Erf*_-v:5","Adminstrador");
+insert into usuarios (nickname,password,type) values ("yasmin","~FFk%)@!AhYU8E-)","Adminstrador");
+insert into usuarios (nickname,password,type) values ("arrieta","e;`f7ZdfHv(2\2Y&","Adminstrador");
+
 
 show tables;

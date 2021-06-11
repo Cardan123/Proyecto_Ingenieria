@@ -19,17 +19,17 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/index">Home</a>
-      <a class="nav-item nav-link" href="/map">Maps</a>
-      <a class="nav-item nav-link" href="/foro">Foro</a>
-      <a class="nav-item nav-link" href="/chatbot">Chatbot</a>
+    <ul class="navbar-nav">
+      <li><a class="nav-item nav-link active" href="/index">Home</a></li>
+      <li></li><a class="nav-item nav-link" href="/map">Maps</a></li>
+      <li></li><a class="nav-item nav-link" href="/foro">Foro</a></li>
+      <li></li><a class="nav-item nav-link" href="/chatbot">Chatbot</a></li>
       <% if (Object.keys(data).length == 0){ %>
-        <a class="nav-item nav-link" href="/login">Login</a>
+        <li></li><a class="nav-item nav-link" href="/login">Login</a></li>
       <% }else{ %>
-        <a class="nav-item nav-link" href="/salir">Salir</a>
+        <li></li><a class="nav-item nav-link" href="/salir">Salir</a></li>
       <% } %>
-    </div>
+      </ul>
   </div>
 </nav>
       

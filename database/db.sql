@@ -15,7 +15,7 @@ CREATE TABLE publicaciones(
 id              int(10) auto_increment not null,  
 id_usuarios      int(10) not null,
 username        varchar(50)  not null,
-content         varchar(50)  not null,
+content         varchar(2000)  not null,
 type_content    varchar(50)  not null,
 CONSTRAINT pk_id PRIMARY KEY(id),
 CONSTRAINT fk_id_usuarios FOREIGN KEY(id_usuarios) REFERENCES usuarios(id)

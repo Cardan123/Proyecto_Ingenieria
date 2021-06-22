@@ -18,11 +18,11 @@ app.set('views', path.join(__dirname,'views'));
 //middleware
 app.use(morgan('dev'));
 app.use(myConnection(mysql,{
-    host: 'bte78rmcmxhi4azyszfv-mysql.services.clever-cloud.com',
-    user: 'ue0nzymcejbyobxf',
-    password: 'P6vvSRSItsTYCZAErKE7',
+    host: 'bgosxkv6wdtgzpvywouy-mysql.services.clever-cloud.com',
+    user: 'umxfmjgew56u90vm',
+    password: 'CipIFs7ogLtLzXFsm2CC',
     port: 3306,
-    database: 'bte78rmcmxhi4azyszfv'
+    database: 'bgosxkv6wdtgzpvywouy'
 }, 'single'));
 app.use(session({
     secret: 'mysecretkey',
